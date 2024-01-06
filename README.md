@@ -30,3 +30,6 @@ Expo CLI
 
 4. App display:
    Download the Expo application from the Play Store and scan the generated bar code, or follow the Expo CLI instructions to run the app on an emulator or physical device.
+
+# Note:
+   The app may not work after 7 days, as the API will expire (trial version).
