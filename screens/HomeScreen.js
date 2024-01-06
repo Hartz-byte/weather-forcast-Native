@@ -103,7 +103,49 @@ const HomeScreen = () => {
           </View>
 
           {/* degree celcius */}
+          <View className="space-y-2">
+            <Text className="text-center font-bold text-white text-6xl ml-5">
+              23&#176;
+            </Text>
+            <Text className="text-center text-white text-xl tracking-widest">
+              Partly Cloudy
+            </Text>
+          </View>
+
+          {/* other stats */}
+          <View className="flex-row justify-between mx-4">
+            {/* wind */}
+            <View className="flex-row space-x-2 items-center">
+              <Image
+                source={require("../assets/icons/wind.png")}
+                className="h-6 w-6"
+              />
+              <Text className="text-white font-semibold text-base">22km</Text>
+            </View>
+
+            {/* drop */}
+            <View className="flex-row space-x-2 items-center">
+              <Image
+                source={require("../assets/icons/drop.png")}
+                className="h-6 w-6"
+              />
+              <Text className="text-white font-semibold text-base">23%</Text>
+            </View>
+
+            {/* sun */}
+            <View className="flex-row space-x-2 items-center">
+              <Image
+                source={require("../assets/icons/sun.png")}
+                className="h-6 w-6"
+              />
+              <Text className="text-white font-semibold text-base">
+                6:05 AM
+              </Text>
+            </View>
+          </View>
         </View>
+
+        {/* forcast for next days */}
       </SafeAreaView>
     </View>
   );
