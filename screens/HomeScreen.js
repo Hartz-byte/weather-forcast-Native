@@ -15,6 +15,7 @@ const HomeScreen = () => {
   const [locations, setLocations] = useState([]);
   const [weather, setWeather] = useState({});
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   // setting up the location
   const handleLocation = (loc) => {
@@ -33,12 +34,14 @@ const HomeScreen = () => {
   };
 
   // handling search function
-  const handleSearch = (value) => {
-    // fetch locations
-    if (value.length > 2) {
-      fetchLocations({ cityName: value }).then((data) => {
+  const handleSearch = async (value) => {
+    try {
+      if (value.length > 2) {
+        const data = await fetchLocations({ cityName: value });
         setLocations(data);
-      });
+      }
+    } catch (error) {
+      setError("Error fetching locations");
     }
   };
 
@@ -47,17 +50,22 @@ const HomeScreen = () => {
   }, []);
 
   const fetchMyWeatherData = async () => {
-    let myCity = await getData("city");
-    let cityName = await getData("Goa");
-    if (myCity) cityName = myCity;
+    try {
+      let myCity = await getData("city");
+      let cityName = await getData("Goa");
+      if (myCity) cityName = myCity;
 
-    fetchWeatherForcast({
-      cityName,
-      days: "5",
-    }).then((data) => {
+      const data = await fetchWeatherForcast({
+        cityName,
+        days: "5",
+      });
+
       setWeather(data);
       setLoading(false);
-    });
+    } catch (error) {
+      setError("Error fetching weather data");
+      setLoading(false);
+    }
   };
 
   // debounce for the search function
@@ -75,10 +83,14 @@ const HomeScreen = () => {
         className="absolute h-full w-full"
       />
 
-      {/* loading status condition */}
+      {/* loading, error, and fetch completion status */}
       {loading ? (
         <View className="flex-1 flex-row justify-center items-center">
           <Progress.CircleSnail thickness={10} size={140} color="white" />
+        </View>
+      ) : error ? (
+        <View className="flex-1 justify-center items-center">
+          <Text className="text-red-500 font-bold">{error}</Text>
         </View>
       ) : (
         <SafeAreaView className="flex flex-1 mt-14">
