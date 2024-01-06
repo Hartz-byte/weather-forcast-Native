@@ -7,23 +7,53 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { theme } from "../theme";
+import { debounce } from "lodash";
 
 import {
   CalendarDaysIcon,
   MagnifyingGlassIcon,
 } from "react-native-heroicons/outline";
 import { MapPinIcon } from "react-native-heroicons/solid";
+import { fetchLocations, fetchWeatherForcast } from "../api/weather";
+import { weatherImages } from "../constants";
 
 const HomeScreen = () => {
   const [showSearch, toggleSearch] = useState(false);
-  const [locations, setLocation] = useState([1, 2, 3]);
+  const [locations, setLocations] = useState([]);
+  const [weather, setWeather] = useState({});
 
+  // location
   const handleLocation = (loc) => {
     console.log("location: ", loc);
+
+    setLocations([]);
+    toggleSearch(false);
+
+    fetchWeatherForcast({
+      cityName: loc.name,
+      days: "5",
+    }).then((data) => {
+      setWeather(data);
+      console.log("got forcast: ", data);
+    });
   };
+
+  // handling search function
+  const handleSearch = (value) => {
+    // fetch locations
+    if (value.length > 2) {
+      fetchLocations({ cityName: value }).then((data) => {
+        setLocations(data);
+      });
+    }
+  };
+
+  // debounce for the search function
+  const handleTextDebounce = useCallback(debounce(handleSearch, 600), []);
+  const { current, location } = weather;
 
   return (
     <View className="flex-1 relative">
@@ -46,6 +76,7 @@ const HomeScreen = () => {
           >
             {showSearch ? (
               <TextInput
+                onChangeText={handleTextDebounce}
                 placeholder="Search city"
                 placeholderTextColor={"lightgray"}
                 className="pl-6 h-10 pb-1 flex-1 text-base text-white"
@@ -79,7 +110,7 @@ const HomeScreen = () => {
                   >
                     <MapPinIcon size="20" color="gray" />
                     <Text className="text-black text-lg ml-2">
-                      London, United Kingdom
+                      {loc?.name}, {loc?.country}
                     </Text>
                   </TouchableOpacity>
                 );
@@ -92,16 +123,20 @@ const HomeScreen = () => {
         <View className="mx-4 flex justify-around flex-1 mb-2">
           {/* location */}
           <Text className="text-white text-center text-2xl font-bold">
-            London,
+            {location?.name},
             <Text className="text-lg font-semibold text-gray-300">
-              United Kingdom
+              {" " + location?.country}
             </Text>
           </Text>
 
           {/* weather image */}
           <View className="flex-row justify-center">
             <Image
-              source={require("../assets/images/partlycloudy.png")}
+              // weather images from api
+              // source={{uri: 'https:' + current?.condition?.icon}}
+
+              // weather images from local storage
+              source={weatherImages[current?.condition?.text]}
               className="w-52 h-52"
             />
           </View>
@@ -109,10 +144,10 @@ const HomeScreen = () => {
           {/* degree celcius */}
           <View className="space-y-2">
             <Text className="text-center font-bold text-white text-6xl ml-5">
-              23&#176;
+              {current?.temp_c}&#176;
             </Text>
             <Text className="text-center text-white text-xl tracking-widest">
-              Partly Cloudy
+              {current?.condition?.text}
             </Text>
           </View>
 
