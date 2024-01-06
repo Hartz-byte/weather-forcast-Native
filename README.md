@@ -14,8 +14,9 @@ Search for weather information by city.
 Make sure you have the following installed:
 
 Node.js
-npm or yarn
-Expo CLI
+1. npm or yarn
+2. Expo CLI
+3. Code editor
 
 ### Tools used:
 1. React Native
