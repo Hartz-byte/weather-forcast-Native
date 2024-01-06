@@ -18,11 +18,11 @@ npm or yarn
 Expo CLI
 
 ### Tools used:
-React Native
-Expo
-Axios
-NativeWind
-react-native-async-storage
+1. React Native
+2. Expo
+3. Axios
+4. NativeWind
+5. react-native-async-storage
 
 ### Installation
 1. Clone the repository:
