@@ -17,6 +17,13 @@ Node.js
 npm or yarn
 Expo CLI
 
+### Tools used:
+React Native
+Expo
+Axios
+NativeWind
+react-native-async-storage
+
 ### Installation
 1. Clone the repository:
    git clone https://github.com/your-username/weather-app.git
