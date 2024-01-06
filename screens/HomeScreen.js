@@ -93,6 +93,16 @@ const HomeScreen = () => {
               United Kingdom
             </Text>
           </Text>
+
+          {/* weather image */}
+          <View className="flex-row justify-center">
+            <Image
+              source={require("../assets/images/partlycloudy.png")}
+              className="w-52 h-52"
+            />
+          </View>
+
+          {/* degree celcius */}
         </View>
       </SafeAreaView>
     </View>
