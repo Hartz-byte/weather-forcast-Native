@@ -43,5 +43,7 @@ Node.js
    The app may not work after 7 days, as the API will expire (trial version).
 
 # Screenshots:
-<img src="[https://your-image-url.type](https://github.com/Hartz-byte/weather-forcast-Native/assets/67004713/59fd5e54-fecd-4959-92fe-f5927c85c847)https://github.com/Hartz-byte/weather-forcast-Native/assets/67004713/59fd5e54-fecd-4959-92fe-f5927c85c847" width="100" height="100">
+![Screenshot_2024-01-06-20-39-19-49_f73b71075b1de7323614b647fe394240](https://github.com/Hartz-byte/weather-forcast-Native/assets/67004713/4dfe720a-4893-4b26-b653-8387f2abbcd1)
+![Screenshot_2024-01-06-20-39-38-40_f73b71075b1de7323614b647fe394240](https://github.com/Hartz-byte/weather-forcast-Native/assets/67004713/18bcfda0-375f-4275-a1c4-896908f15d01)
+![Screenshot_2024-01-06-20-39-43-47_f73b71075b1de7323614b647fe394240](https://github.com/Hartz-byte/weather-forcast-Native/assets/67004713/221c4592-70e1-4cb7-9dbe-ade3e7496598)
 
