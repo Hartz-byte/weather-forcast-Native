@@ -20,6 +20,7 @@ import { MapPinIcon } from "react-native-heroicons/solid";
 import { fetchLocations, fetchWeatherForcast } from "../api/weather";
 import { weatherImages } from "../constants";
 import * as Progress from "react-native-progress";
+import { getData, storeData } from "../utils/asyncStorage";
 
 const HomeScreen = () => {
   const [showSearch, toggleSearch] = useState(false);
@@ -41,6 +42,7 @@ const HomeScreen = () => {
     }).then((data) => {
       setWeather(data);
       setLoading(false);
+      storeData("city", loc.name);
     });
   };
 
@@ -59,8 +61,12 @@ const HomeScreen = () => {
   }, []);
 
   const fetchMyWeatherData = async () => {
+    let myCity = await getData("city");
+    let cityName = await getData("Goa");
+    if (myCity) cityName = myCity;
+
     fetchWeatherForcast({
-      cityName: "Goa",
+      cityName,
       days: "5",
     }).then((data) => {
       setWeather(data);
@@ -208,7 +214,7 @@ const HomeScreen = () => {
                   className="h-6 w-6"
                 />
                 <Text className="text-white font-semibold text-base">
-                  6:05 AM
+                  {weather?.forecast?.forecastday[0]?.astro?.sunrise}
                 </Text>
               </View>
             </View>
