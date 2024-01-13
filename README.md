@@ -1,4 +1,4 @@
-# Weather Forecast App
+# Weather Forecast Native App
 ## Introduction
 This is a simple React Native weather app that provides current weather information and a 5-day forecast. The app allows users to search for weather information by city.
 
